@@ -1,10 +1,12 @@
 var bubbles, player, bullets;
-var playerImg;
+var playerImg, playerAnim;
 var score;
 var hue, gamefont;
 function preload() {
     gamefont = loadFont('font2.ttf');
-    playerImg = loadImage('https://raw.githubusercontent.com/molleindustria/p5.play/master/examples/assets/asteroids_ship0001.png');
+    let link = 'https://raw.githubusercontent.com/molleindustria/p5.play/master/examples/assets/';
+    playerImg = loadImage(link + 'asteroids_ship0001.png');
+    playerAnim = loadAnimation(link + 'asteroids_ship0002.png', link + 'asteroids_ship0003.png', link + 'asteroids_ship0004.png', link + 'asteroids_ship0005.png', link + 'asteroids_ship0006.png', link + 'asteroids_ship0007.png');
 }
 function setup() {
     createCanvas(700, 700);
@@ -29,10 +31,12 @@ function draw() {
 
     drawSprites();
 
-    textSize(20);
+    textSize(15);
     textFont(gamefont);
     fill(255);
-    text("Score: " + floor(score), 10, 30);
+    text("Score: " + floor(score), 10, 22);
+    text("Controls: w + a + d", width - 200, 22);
+    text("Space to shoot", width - 160, 52);
 
     if (hue > 360)
         hue = 0;

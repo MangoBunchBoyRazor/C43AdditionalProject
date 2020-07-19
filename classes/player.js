@@ -2,7 +2,8 @@ class Player {
     constructor(x, y) {
         this.sprite = createSprite(x, y, 50, 50);
         this.sprite.friction = 0.1;
-        this.sprite.addImage(playerImg);
+        this.sprite.addImage('normal', playerImg);
+        this.sprite.addAnimation('thrust', playerAnim);
         this.sprite.setCollider("circle");
     }
     update() {
@@ -11,8 +12,10 @@ class Player {
             this.sprite.rotation -= 4;
         else if (keyDown('d'))
             this.sprite.rotation += 4;
-        if (keyDown('w'))
+        if (keyDown('w')) {
             this.sprite.addSpeed(.9, this.sprite.rotation);
+            this.sprite.changeAnimation('thrust');
+        } else this.sprite.changeAnimation('normal');
 
         this.sprite.limitSpeed(10);
 
