@@ -3,8 +3,8 @@ var playerImg;
 var score;
 var hue, gamefont;
 function preload() {
-    gamefont = loadFont('https://krunker.io/css/fonts/font2.ttf');
-    playerImg = loadImage('https://raw.githubusercontent.com/molleindustria/p5.play/master/examples/assets/asteroids_ship0001.png')
+    gamefont = loadFont('font2.ttf');
+    playerImg = loadImage('https://raw.githubusercontent.com/molleindustria/p5.play/master/examples/assets/asteroids_ship0001.png');
 }
 function setup() {
     createCanvas(700, 700);
@@ -32,18 +32,21 @@ function draw() {
     textSize(20);
     textFont(gamefont);
     fill(255);
-    text("Score: " + score, 10, 30);
+    text("Score: " + floor(score), 10, 30);
 
     if (hue > 360)
         hue = 0;
 
     if (score % 10 == 0 && score != 0) {
         createBubbles();
+        score += .5;
     }
 }
 function keyPressed() {
-    if (keyCode == 32)
+    if (keyCode == 32) {
         bullets.add(createBullet(player.sprite.position.x, player.sprite.position.y))
+        return false;
+    }
 }
 function createBullet(x, y) {
     let s = createSprite(x, y, 10, 10);
